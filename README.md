@@ -1,2 +1,2 @@
-# ansible-role-pscheduler-5-ubuntu
-A role that builds pscheduler 5.0 on ubuntu 18
+# ansible-role-template
+Basic template for developing Ansible Roles

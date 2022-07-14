@@ -1,0 +1,17 @@
+galaxy_info:
+  author: University of Michigan UMNet
+  description: template for Ansible Roles
+  company: University of Michigan
+  license: Apache 2.0
+
+  min_ansible_version: 2.5
+
+  platforms:
+    - name: ubuntu      
+      versions:
+        - 18
+
+  galaxy_tags:
+    - development
+
+dependencies: []

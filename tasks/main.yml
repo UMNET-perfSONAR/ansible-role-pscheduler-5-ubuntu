@@ -1,0 +1,7 @@
+---
+# template tasks file
+
+- name: Load variables based on OS type
+  tags: [ 'tag', 'another_tag' ]
+  debug:
+    msg: "{{ somevar | default('ansible') }}"
