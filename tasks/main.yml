@@ -1,7 +1,143 @@
 ---
 # template tasks file
 
-- name: Load variables based on OS type
-  tags: [ 'tag', 'another_tag' ]
-  debug:
-    msg: "{{ somevar | default('ansible') }}"
+#- name: Load variables based on OS type
+#  tags: [ 'tag', 'another_tag' ]
+#  debug:
+#    msg: "{{ somevar | default('ansible') }}"
+
+ - name: debug start role
+   tags: debug
+   debug:
+     msg: "ansible-role-pscheduler-5-ubuntu {{ inventory_hostname }}"
+
+ - name: install vim
+   tags: package
+   package:
+     name: vim
+     state: present
+
+ - name: install wget
+   tags: package
+   package:
+     name: wget
+     state: present
+
+ - name: install tree
+   tags: package
+   package:
+     name: tree
+     state: present
+
+ - name: install devscripts
+   tags: package
+   package:
+     name: devscripts
+     state: present
+
+ - name: install pylint
+   tags: package
+   package:
+     name: pylint
+     state: present
+
+ - name: install rsync
+   tags: package
+   package:
+     name: rsync
+     state: present
+
+ - name: install sudo
+   tags: package
+   package:
+     name: sudo
+     state: present
+
+ - name: install equivs
+   tags: package
+   package:
+     name: equivs
+     state: present
+
+ - name: install m4
+   tags: package
+   package:
+     name: m4
+     state: present
+
+ - name: clone unibuild
+   tags: unibuild
+   ansible.builtin.git:
+     repo: https://github.com/perfsonar/unibuild.git
+     dest: /tmp/unibuild
+
+ - name: make unibuild
+   tags: unibuild
+   make:
+     chdir: /tmp/unibuild
+
+ - name: remove jq
+   tags: package
+   package:
+     name: jq
+     state: absent
+
+ - name: remove libjq1
+   tags: package
+   package:
+     name: libjq1
+     state: absent
+
+ - name: clone pscheduler
+   tags: pscheduler
+   ansible.builtin.git:
+     repo: https://github.com/perfsonar/pscheduler.git
+     version: issue-1117
+     dest: /tmp/pscheduler
+
+ - name: pscheduler-tool-nuttcp commented out from unibuild-order
+   tags: pscheduler
+   replace:
+     dest: /tmp/pscheduler/unibuild-order
+     regexp: '^pscheduler-tool-nuttcp'
+     replace: '#pscheduler-tool-nuttcp'
+
+ - name: pscheduler-tool-owping commented out from unibuild-order
+   tags: pscheduler
+   replace:
+     dest: /tmp/pscheduler/unibuild-order
+     regexp: '^pscheduler-tool-owping'
+     replace: '#pscheduler-tool-owping'
+
+ - name: pscheduler-tool-powstream commented out from unibuild-order
+   tags: pscheduler
+   replace:
+     dest: /tmp/pscheduler/unibuild-order
+     regexp: '^pscheduler-tool-powstream'
+     replace: '#pscheduler-tool-powstream'
+
+ - name: pscheduler-bundle-full commented out from unibuild-order
+   tags: pscheduler
+   replace:
+     dest: /tmp/pscheduler/unibuild-order
+     regexp: '^pscheduler-bundle-full'
+     replace: '#pscheduler-bundle-full'
+
+ - name: pscheduler-bundle-obsolete commented out from unibuild-order
+   tags: pscheduler
+   replace:
+     dest: /tmp/pscheduler/unibuild-order
+     regexp: '^pscheduler-bundle-obsolete'
+     replace: '#pscheduler-bundle-obsolete'
+
+ - name: pscheduler-bundle-snmp commented out from unibuild-order
+   tags: pscheduler
+   replace:
+     dest: /tmp/pscheduler/unibuild-order
+     regexp: '^pscheduler-bundle-snmp'
+     replace: '#pscheduler-bundle-snmp'
+
+ - name: make pscheduler
+   tags: pscheduler
+   make:
+     chdir: /tmp/pscheduler
